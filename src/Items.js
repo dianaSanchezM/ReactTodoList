@@ -1,28 +1,22 @@
-import React, { Component } from "react";
+import React from 'react';
 import Item from './Item';
-export class Items extends React.Component {
-    state = {
-        list: [],
-        todo: false
-    }
 
-    handleButtonChange = e => {
-          this.setState({ todo: !this.state.todo},
-              console.log("todo", this.state.todo));
-          
-      };
+
+export class Items extends React.Component {      
       render() {
-        console.log(this.props.list);
-
+        const {todos, handleTypeChange, handleCheckedChange} = this.props;
         return(
-            <>
-            <ul className="suggestions">
-            {this.props.list.filter(element => element.active !== this.state.todo )
-            .map( element => <Item item= {element}/>)}
-            </ul>
-            </>
+          <ul>
+          {todos.map(element => <Item item={element} handleCheckedChange={handleCheckedChange}/>)}
+          <li>
+          <button onClick={() => handleTypeChange("All")}>All</button>
+          <button onClick={() => handleTypeChange("Todo")}>To do</button>
+          <button onClick={() => handleTypeChange("Done")}>Done</button>
+          </li>
+          </ul>
         )
         
       }
     }
+
     export default Items;

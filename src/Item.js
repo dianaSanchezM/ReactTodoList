@@ -1,22 +1,13 @@
-import React, { Component } from "react";
-class Item extends React.Component {
-    state = {
-       active: false
-    }
-
-    handleChange = e => {
-        
-        this.setState({ active: !this.state.active},
-        ()=>{
-            console.log(this.state.active);
-        });
-        this.handleChange();
-    };
+import React from "react";
+export class Item extends React.Component {
+    
       render() {
-        const {item, handleChange} = this.props
+        const {item, handleCheckedChange} = this.props;
         return (
             <li>
-                <input type="checkbox" defaultChecked={this.state.active} id="myCheck" onclick={handleChange}></input>
+                <input type="checkbox" checked={item.active} id={item.activity} onChange={event => {
+              handleCheckedChange(event);
+            }} ></input>
                 {item.activity}
             </li>
         )
